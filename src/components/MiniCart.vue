@@ -5,7 +5,7 @@
           <strong>{{ item.title }}</strong>
           <br />
           {{ item.quantity }} x ${{ item.price }}
-          <a class="badge badge-secondary" href="#" @click.prevent="removeProductFromCart(item.product)">remove</a>
+          <a class="badge badge-secondary text-black" href="#" @click.prevent="removeProductFromCart(item.id)">remove</a>
         </a>
       </li>
       <li>
@@ -61,17 +61,15 @@ export default {
     // })
   },
   mounted() {
-    this.getCart();
-    this.getProducts();
+    // this.getCart();
+    // this.getProducts();
     // this.cartProducts = this.getCartProductDetails();
   },
   methods: {
     // Example 1: mapActions
     ...mapActions("cart", [
       "removeProductFromCart",
-      "clearCartItems",
-      "getCart",
-      "getProducts"
+      "clearCartItems"
     ])
     // Example 2: mapActions
     // ...mapActions({

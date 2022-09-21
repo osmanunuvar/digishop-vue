@@ -1,5 +1,11 @@
 export const cartItemCount = (state) => {
-    return state.cart.lenght;
+    if(state.cart.products){
+        return state.cart.products.length;
+    }
+    else{
+        return 0;
+    }
+    
 }
 
 export const cartTotalPrice = (state) => {

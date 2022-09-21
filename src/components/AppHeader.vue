@@ -13,7 +13,7 @@
               {{ cartItemCount }} Cart
             </button>
             
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-center">
               <div @click="$event.stopPropagation()">
                 <mini-cart />
               </div>
@@ -42,15 +42,31 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import MiniCart from "./MiniCart";
 export default {
   components: { MiniCart },
   computed: {
     ...mapGetters("cart", ["cartItemCount"])
+  },
+  mounted() {
+    this.getCart();
+    this.getProducts();
+  },
+  methods: {
+    ...mapActions("cart", [
+      "getCart",
+      "getProducts"
+    ])
   }
 };
 </script>
 
 <style>
+  .dropdown-menu-center {
+  left: 50% !important;
+  right: auto !important;
+  text-align: center !important;
+  transform: translate(-50%, 0) !important;
+}
 </style>
