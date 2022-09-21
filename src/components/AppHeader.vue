@@ -4,7 +4,6 @@
       <div class="container">
         <div class="nav navbar-nav">
           <router-link to="/" class="nav-tem nav-link active">Home</router-link>
-          <a class="nav-item nav-link" href="#">Product</a>
         </div>
         <div>
           <div class="dropdown">
