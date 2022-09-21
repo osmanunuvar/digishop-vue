@@ -6,35 +6,17 @@
           <router-link to="/" class="nav-tem nav-link active">Home</router-link>
           <a class="nav-item nav-link" href="#">Product</a>
         </div>
-
         <div>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ cartItemCount }} Cart
             </button>
-            
             <ul class="dropdown-menu dropdown-menu-center">
               <div @click="$event.stopPropagation()">
                 <mini-cart />
               </div>
             </ul>
-            <!-- <div @click="$event.stopPropagation()">
-              <mini-cart />
-            </div> -->
-          </div>
-          <!-- <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="triggerId"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >{{ cartItemCount }} Cart</button>
-            <div @click="$event.stopPropagation()">
-              <mini-cart />
-            </div>
-          </div> -->
+          </div>       
         </div>
       </div>
     </nav>

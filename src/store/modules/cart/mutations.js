@@ -35,7 +35,7 @@ export const REMOVE_PRODUCT_FROM_CART = (state, productId) => {
         let product = state.cart.products.find(item => {
             return item.productId == productId;
         });
-        if(product){
+        if(product.quantity>0){
             product.quantity--;
         }
     }
