@@ -1,13 +1,15 @@
 <template>
   <div>
-      <li v-for="item in getCartProductDetails" :key="item.id">
-        <a class="dropdown-item" href="#">
-          <strong>{{ item.title }}</strong>
-          <br />
-          {{ item.quantity }} x ${{ item.price }}
-          <a class="badge badge-secondary text-black" href="#" @click.prevent="removeProductFromCart(item.id)">remove</a>
-        </a>
-      </li>
+      <div v-for="item in getCartProductDetails" :key="item.id">
+        <li v-if="item.quantity>0">
+          <a class="dropdown-item" href="#">
+            <strong>{{ item.title }}</strong>
+            <br />
+            {{ item.quantity }} x ${{ item.price }}
+            <a class="badge badge-secondary text-black" href="#" @click.prevent="removeProductFromCart(item.id)">remove</a>
+          </a>
+        </li>
+      </div>
       <li>
         <a class="dropdown-item" href="#">
             <div class="d-flex justify-content-between">
