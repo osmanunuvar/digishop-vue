@@ -11,3 +11,10 @@ export const getProduct = ({ commit }, productId) => {
         commit('SET_PRODUCT', response.data);
     })
 }
+
+
+export const getFilteredProducts = ({ commit }, searchText) => {
+    Product.all().then(response => {
+        commit('SET_PRODUCTS', response.data.filter(x=> x.title.includes(searchText)));
+    })
+}
