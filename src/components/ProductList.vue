@@ -1,6 +1,6 @@
 <template>
  <div class="d-flex align-items-stretch flex-wrap">
-     <div class="input-group">
+     <div class="input-group mt-3">
         <div class="form-outline">
           <input type="search" id="form1" class="form-control" v-model="searchQuery" v-on:keypress="resultQuery" />
           <label class="form-label" for="form1">Search</label>
