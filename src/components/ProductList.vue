@@ -5,6 +5,13 @@
           <input type="search" id="form1" class="form-control" v-model="searchQuery" v-on:keypress="resultQuery" />
           <label class="form-label" for="form1">Search</label>
         </div>
+        <div>
+          <select v-model="sortDirection" required v-on:change="resultQuery" class="form-select form-select-sm" aria-label=".form-select-sm example">
+            <option value=null selected>Open this select menu</option>
+            <option value="asc">Asc</option>
+            <option value="desc">Desc</option>
+          </select>
+        </div>
       </div>
       <product-card v-for="product in resultQuery" :key="product.id" :product="product" />
     </div>
@@ -15,8 +22,9 @@
   import ProductCard from "./ProductCard";
   export default {
     data() {
-        return {
-          searchQuery: null
+        return {         
+          searchQuery: null,
+          sortDirection: null
         };
     },
     components: {
@@ -24,19 +32,30 @@
     },
     computed: {
       resultQuery() {
+        var list = this.$store.state.product.products;
         if(this.searchQuery && this.searchQuery.length > 1){
-          return this.$store.state.product.products.filter(x=> x.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
-        } else {
-          return this.$store.state.product.products;
+          list = list.filter(x=> x.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
         }
-      },
+        if (this.sortDirection){
+          if(this.sortDirection=="asc"){
+          list = list.sort((p1,p2)=> p1.price - p2.price); 
+          }
+          else if (this.sortDirection=="desc"){
+          list = list.sort((p1,p2)=> p2.price - p1.price); 
+          }
+        }
+        
+          
+        
+        return list;
+      },     
       ...mapState("product", ["products"])
     },
     mounted() {
         this.getProducts();
     },
     methods: {
-      ...mapActions("product", ["getProducts", "getFilteredProducts"])
+     ...mapActions("product", ["getProducts", "getFilteredProducts"])
     }
   };
   </script>
