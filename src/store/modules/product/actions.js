@@ -18,3 +18,9 @@ export const getFilteredProducts = ({ commit }, searchText) => {
         commit('SET_PRODUCTS', response.data.filter(x=> x.title.includes(searchText)));
     })
 }
+
+export const getCategories = ({ commit }) => {
+    Product.categories().then(response => {
+        commit('SET_CATEGORIES', response.data);
+    })
+}

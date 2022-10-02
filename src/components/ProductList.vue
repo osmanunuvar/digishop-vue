@@ -12,6 +12,12 @@
             <option value="desc">Desc</option>
           </select>
         </div>
+        <div>
+          <h3>Filter By Category</h3>
+        <select v-model="category">
+            <option v-for="category in getCategoryList" :key="category">{{category}}</option>
+        </select>
+        </div>
       </div>
       <product-card v-for="product in resultQuery" :key="product.id" :product="product" />
     </div>
@@ -24,13 +30,17 @@
     data() {
         return {         
           searchQuery: null,
-          sortDirection: null
+          sortDirection: null,
+          category:''
         };
     },
     components: {
       ProductCard
     },
     computed: {
+      getCategoryList(){
+        return this.$store.state.product.categories;
+      },
       resultQuery() {
         var list = this.$store.state.product.products;
         if(this.searchQuery && this.searchQuery.length > 1){
@@ -44,6 +54,9 @@
           list = list.sort((p1,p2)=> p2.price - p1.price); 
           }
         }
+        if(this.category){
+          list = list.filter(product => product.category.toLowerCase() == this.category.toLowerCase())
+        }
         
           
         
@@ -53,9 +66,10 @@
     },
     mounted() {
         this.getProducts();
+        this.getCategories();
     },
     methods: {
-     ...mapActions("product", ["getProducts", "getFilteredProducts"])
+     ...mapActions("product", ["getProducts", "getFilteredProducts", "getCategories"])
     }
   };
   </script>

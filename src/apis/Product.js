@@ -9,5 +9,9 @@ export default {
 
     show(id) {
         return Api.get(`${END_POINT}/${id}`);
+    },
+
+    categories(){
+        return Api.get(`${END_POINT}/categories`)
     }
 }
