@@ -1,25 +1,27 @@
 <template>
  <div class="d-flex align-items-stretch flex-wrap">
-     <div class="input-group mt-3">
+     <div class="input-group mt-3 justify-content-between">
         <div class="form-outline">
           <input type="search" id="form1" class="form-control" v-model="searchQuery" v-on:keypress="resultQuery" />
           <label class="form-label" for="form1">Search</label>
         </div>
         <div>
-          <select v-model="sortDirection" required v-on:change="resultQuery" class="form-select form-select-sm" aria-label=".form-select-sm example">
-            <option value=null selected>Open this select menu</option>
-            <option value="asc">Asc</option>
-            <option value="desc">Desc</option>
-          </select>
-        </div>
-        <div>
-          <h3>Filter By Category</h3>
-        <select v-model="category">
+        <select v-model="category" class="form-select form-select-sm" aria-label=".form-select-sm example">
+            <option value="" selected>Select Category</option>
             <option v-for="category in getCategoryList" :key="category">{{category}}</option>
         </select>
         </div>
+        <div>
+          <select v-model="sortDirection" required v-on:change="resultQuery" class="form-select form-select-sm" aria-label=".form-select-sm example">
+            <option value=null selected>Sort By</option>
+            <option value="asc">Price: Low to High</option>
+            <option value="desc">Price: High to Low</option>
+          </select>
+        </div>
       </div>
+      <div class="row">
       <product-card v-for="product in resultQuery" :key="product.id" :product="product" />
+      </div>
     </div>
   </template>
   
@@ -57,9 +59,7 @@
         if(this.category){
           list = list.filter(product => product.category.toLowerCase() == this.category.toLowerCase())
         }
-        
-          
-        
+         
         return list;
       },     
       ...mapState("product", ["products"])
